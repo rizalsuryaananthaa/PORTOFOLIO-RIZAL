@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Website portofolio pribadi mahasiswa Sistem Informasi.">
+  <title>Rizal — Portfolio</title>
+  <style>
+    :root {
+      --bg: #0b1020;
+      --panel: #121a2e;
+      --panel2: #18233a;
+      --text: #edf3ff;
+      --muted: #a5b2ca;
+      --accent: #7cdbca;
+      --accent2: #9ba8ff;
+      --line: rgba(255,255,255,.12);
+      --max: 1100px;
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; scroll-padding-top: 82px; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; line-height: 1.65; }
+    a { color: inherit; text-decoration: none; }
+    button, input, textarea { font: inherit; }
+    .wrap { width: min(var(--max), calc(100% - 40px)); margin: auto; }
+    .nav { position: sticky; top: 0; z-index: 20; background: rgba(11,16,32,.88); backdrop-filter: blur(16px); border-bottom: 1px solid var(--line); }
+    .nav-inner { min-height: 72px; display: flex; align-items: center; justify-content: space-between; gap: 18px; }
+    .brand { font-weight: 850; letter-spacing: -.04em; font-size: 1.15rem; }
+    .brand span { color: var(--accent); }
+    .nav-links { display: flex; align-items: center; gap: 22px; color: var(--muted); font-size: .92rem; }
+    .nav-links a:hover, .nav-links a:focus { color: var(--accent); }
+    .menu-btn { display: none; border: 1px solid var(--line); background: var(--panel); color: var(--text); border-radius: 10px; padding: 8px 12px; }
+    .hero { padding: 94px 0 78px; overflow: hidden; }
+    .hero-grid { display: grid; grid-template-columns: 1.2fr .8fr; align-items: center; gap: 54px; }
+    .eyebrow { display: inline-flex; align-items: center; gap: 9px; border: 1px solid var(--line); color: var(--accent); border-radius: 999px; padding: 7px 13px; font-size: .82rem; font-weight: 700; }
+    .eyebrow:before { content: ""; width: 7px; height: 7px; background: var(--accent); border-radius: 50%; box-shadow: 0 0 15px var(--accent); }
+    h1 { margin: 20px 0 18px; font-size: clamp(2.7rem, 6vw, 5rem); line-height: 1.04; letter-spacing: -.065em; }
+    h1 .gradient { color: var(--accent); }
+    .lead { max-width: 640px; color: var(--muted); font-size: 1.08rem; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 28px; }
+    .btn { display: inline-flex; justify-content: center; align-items: center; gap: 8px; padding: 12px 17px; border-radius: 12px; border: 1px solid var(--line); font-weight: 750; transition: transform .2s, border-color .2s; cursor: pointer; }
+    .btn:hover { transform: translateY(-2px); border-color: var(--accent); }
+    .btn-primary { background: var(--accent); color: #07131a; border-color: var(--accent); }
+    .hero-card { position: relative; background: linear-gradient(145deg, #1b2942, #101729); border: 1px solid var(--line); border-radius: 28px; padding: 28px; min-height: 330px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 24px 80px rgba(0,0,0,.24); }
+    .orb { position: absolute; width: 190px; height: 190px; border-radius: 50%; background: linear-gradient(135deg, var(--accent), var(--accent2)); opacity: .9; filter: blur(.2px); right: -30px; top: -30px; }
+    .avatar { position: relative; width: 124px; height: 124px; display: block; object-fit: cover; object-position: center 30%; border-radius: 26px; background: rgba(11,16,32,.88); border: 2px solid rgba(255,255,255,.24); box-shadow: 0 12px 35px rgba(0,0,0,.28); }
+    .card-kicker { color: var(--muted); font-size: .85rem; }
+    .hero-card h2 { margin: 8px 0 4px; font-size: 1.65rem; letter-spacing: -.04em; }
+    .tag-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 18px; }
+    .tag { border: 1px solid var(--line); border-radius: 999px; padding: 6px 10px; color: #d6e1f7; font-size: .78rem; }
+    section { padding: 76px 0; }
+    .section-head { display: flex; align-items: end; justify-content: space-between; gap: 20px; margin-bottom: 30px; }
+    .section-label { color: var(--accent); font-size: .78rem; font-weight: 850; text-transform: uppercase; letter-spacing: .16em; }
+    h2.section-title { margin: 7px 0 0; font-size: clamp(2rem, 4vw, 3rem); line-height: 1.1; letter-spacing: -.05em; }
+    .section-desc { max-width: 490px; color: var(--muted); margin: 0; }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .panel { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; padding: 25px; }
+    .panel h3 { margin: 0 0 12px; font-size: 1.15rem; }
+    .panel p { margin: 0; color: var(--muted); }
+    .facts { display: grid; gap: 14px; margin-top: 18px; }
+    .fact { display: flex; justify-content: space-between; gap: 18px; border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+    .fact:last-child { border: 0; padding-bottom: 0; }
+    .fact span:first-child { color: var(--muted); }
+    .fact span:last-child { font-weight: 700; text-align: right; }
+    .timeline { display: grid; gap: 18px; }
+    .timeline-item { border-left: 2px solid var(--accent); padding: 2px 0 3px 20px; }
+    .timeline-item .date { color: var(--accent); font-size: .82rem; font-weight: 800; }
+    .timeline-item h4 { margin: 4px 0; font-size: 1rem; }
+    .timeline-item p { color: var(--muted); margin: 0; font-size: .92rem; }
+    .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .skill-card { background: var(--panel); border: 1px solid var(--line); border-radius: 18px; padding: 22px; }
+    .skill-icon { display: grid; place-items: center; width: 44px; height: 44px; border-radius: 13px; background: rgba(124,219,202,.12); color: var(--accent); font-size: 1.25rem; margin-bottom: 16px; }
+    .skill-card h3 { margin: 0 0 8px; }
+    .skill-card p { margin: 0; color: var(--muted); font-size: .92rem; }
+    .skill-list { display: flex; flex-wrap: wrap; gap: 7px; margin-top: 14px; }
+    .skill-list span { color: #dbe5f8; background: var(--panel2); border-radius: 7px; padding: 4px 8px; font-size: .75rem; }
+    .projects { display: grid; grid-template-columns: repeat(2, 1fr); gap: 18px; }
+    .project-card { background: var(--panel); border: 1px solid var(--line); border-radius: 20px; overflow: hidden; }
+    .project-visual { min-height: 220px; padding: 0; display: block; overflow: hidden; background: linear-gradient(135deg, rgba(124,219,202,.22), rgba(155,168,255,.13)); }
+    .project-visual img { width: 100%; height: 240px; display: block; object-fit: cover; transition: transform .35s ease; }
+    .project-card:hover .project-visual img { transform: scale(1.035); }
+    .project-caption { padding: 10px 22px 0; color: var(--accent); font-size: .78rem; font-weight: 800; letter-spacing: .08em; }
+    .gallery-wide { grid-column: 1 / -1; }
+    .gallery-wide .project-visual img { height: 300px; object-position: center 42%; }
+    .project-visual span { font-size: 2.4rem; font-weight: 900; color: var(--accent); letter-spacing: -.06em; }
+    .project-body { padding: 22px; }
+    .project-body h3 { margin: 0 0 8px; }
+    .project-body p { color: var(--muted); margin: 0; }
+    .project-meta { margin-top: 14px; color: var(--accent); font-size: .8rem; font-weight: 750; }
+    .achievement-note { color: var(--muted); font-size: .9rem; margin-top: 20px; }
+    .contact-box { background: linear-gradient(135deg, #17273b, #151a32); border: 1px solid var(--line); border-radius: 25px; padding: clamp(25px, 5vw, 48px); display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 30px; }
+    .contact-box h2 { margin: 0 0 10px; font-size: clamp(1.8rem, 4vw, 2.7rem); letter-spacing: -.05em; }
+    .contact-box p { margin: 0; color: var(--muted); max-width: 570px; }
+    .contact-links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 20px; }
+    footer { border-top: 1px solid var(--line); padding: 24px 0; color: var(--muted); font-size: .85rem; }
+    .footer-inner { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+    .muted { color: var(--muted); }
+    @media (max-width: 760px) {
+      .wrap { width: min(100% - 28px, var(--max)); }
+      .nav-inner { min-height: 64px; }
+      .menu-btn { display: inline-flex; }
+      .nav-links { display: none; position: absolute; top: 64px; left: 0; right: 0; background: #0f1628; border-bottom: 1px solid var(--line); padding: 18px 22px; flex-direction: column; align-items: stretch; gap: 15px; }
+      .nav-links.open { display: flex; }
+      .hero { padding: 58px 0 48px; }
+      .hero-grid, .about-grid, .contact-box { grid-template-columns: 1fr; }
+      .hero-grid { gap: 34px; }
+      .hero-card { min-height: 280px; }
+      section { padding: 54px 0; }
+      .section-head { align-items: start; flex-direction: column; }
+      .skills-grid, .projects { grid-template-columns: 1fr; }
+      .contact-box .btn { justify-self: start; }
+    }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } *, *::before, *::after { transition: none !important; } }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <div class="wrap nav-inner">
+      <a class="brand" href="#home">RIZAL<span>.</span></a>
+      <button class="menu-btn" id="menuBtn" aria-label="Buka navigasi" aria-expanded="false">Menu ☰</button>
+      <nav class="nav-links" id="navLinks" aria-label="Navigasi utama">
+        <a href="#about">About Me</a>
+        <a href="#skills">What I Can Do</a>
+        <a href="#work">Work Gallery</a>
+        <a href="#achievement">Achievement</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="wrap hero-grid">
+        <div>
+          <div class="eyebrow">Mahasiswa Sistem Informasi</div>
+          <h1>Membangun solusi digital dengan <span class="gradient">rasa ingin tahu.</span></h1>
+          <p class="lead">Halo, saya Rizal Surya Anantha. Saya tertarik pada teknologi, jaringan komputer, dan pengembangan web. Saya senang memahami cara kerja sistem dan mengubah pengetahuan menjadi solusi yang bermanfaat.</p>
+          <div class="actions">
+            <a class="btn btn-primary" href="#work">Lihat Proyek <span aria-hidden="true">↗</span></a>
+            <a class="btn" href="#contact">Hubungi Saya</a>
+          </div>
+        </div>
+        <aside class="hero-card" aria-label="Ringkasan profil">
+          <div class="orb"></div>
+          <img src="foto-profil.png" alt="Foto profil Rizal" class="avatar">
+          <div>
+            <div class="card-kicker">PORTFOLIO / 2026</div>
+            <h2>Rizal</h2>
+            <div class="muted">Information Systems Student</div>
+            <div class="tag-row">
+              <span class="tag">Networking</span><span class="tag">Web Development</span><span class="tag">Problem Solving</span>
+            </div>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-label">01 / About</div><h2 class="section-title">About Me</h2></div>
+          <p class="section-desc">Profil singkat, latar belakang pendidikan, dan aktivitas yang sedang saya kembangkan.</p>
+        </div>
+        <div class="about-grid">
+          <article class="panel">
+            <h3>Perkenalan</h3>
+            <p>Saya merupakan lulusan SMK jurusan Teknik Komputer dan Jaringan yang melanjutkan studi di Program Studi Sistem Informasi. Saya memiliki ketertarikan pada infrastruktur jaringan, troubleshooting, dan web development dasar. Saya terus belajar untuk memperluas kemampuan teknis sekaligus komunikasi.</p>
+            <div class="facts">
+              <div class="fact"><span>Nama</span><span>Rizal Surya Anantha</span></div>
+              <div class="fact"><span>NIM</span><span>26051214175</span></div>
+              <div class="fact"><span>Program Studi</span><span>S1 Sistem Informasi</span></div>
+              <div class="fact"><span>Universitas</span><span>Universitas Negeri Surabaya</span></div>
+            </div>
+          </article>
+          <article class="panel">
+            <h3>Pendidikan & Pengalaman</h3>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="date">2026 — Sekarang</div>
+                <h4>S1 Sistem Informasi · Universitas Negeri Surabaya</h4>
+                <p>Mempelajari keterkaitan teknologi, proses bisnis, data, dan kebutuhan pengguna.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="date">2023 — 2026</div>
+                <h4>SMK Negeri 7 Surabaya · TKJ</h4>
+                <p>Mempelajari dasar jaringan komputer, perangkat keras, konfigurasi, dan troubleshooting.</p>
+              </div>
+              <div class="timeline-item">
+                <div class="date">Pengalaman Praktik Kerja</div>
+                <h4>Magang · PT Telkom Akses</h4>
+                <p>Pengalaman praktik terkait jaringan, penyambungan kabel, konfigurasi, dan komunikasi dengan pelanggan.</p>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-label">02 / Capabilities</div><h2 class="section-title">What I Can Do</h2></div>
+          <p class="section-desc">Kemampuan dan tools yang pernah dipelajari atau digunakan. Daftar ini bisa diperbarui seiring perkembangan skill.</p>
+        </div>
+        <div class="skills-grid">
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">⌘</div>
+            <h3>Networking</h3>
+            <p>Memahami dasar jaringan dan membantu proses pemeriksaan konektivitas serta troubleshooting.</p>
+            <div class="skill-list"><span>LAN</span><span>TCP/IP</span><span>MikroTik</span><span>Router & Switch</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">⌁</div>
+            <h3>Web Development</h3>
+            <p>Membuat halaman web sederhana dan memahami struktur serta tampilan website.</p>
+            <div class="skill-list"><span>HTML</span><span>CSS</span><span>JavaScript Dasar</span></div>
+          </article>
+          <article class="skill-card">
+            <div class="skill-icon" aria-hidden="true">↗</div>
+            <h3>Tools & Communication</h3>
+            <p>Menggunakan tools teknis dan menyampaikan informasi kepada pengguna dengan jelas.</p>
+            <div class="skill-list"><span>PuTTY</span><span>MySQL Dasar</span><span>Troubleshooting</span><span>Public Speaking</span></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="work">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-label">03 / Selected Work</div><h2 class="section-title">Work Gallery</h2></div>
+          <p class="section-desc">Dokumentasi pengalaman magang dan perangkat jaringan yang pernah dijumpai selama praktik di bidang telekomunikasi.</p>
+        </div>
+        <div class="projects">
+          <article class="project-card gallery-wide">
+            <div class="project-visual"><img src="magang-telkom-akses.jpg" alt="Dokumentasi kegiatan magang bersama tim PT Telkom Akses" loading="lazy"></div>
+            <div class="project-caption">DOKUMENTASI PENGALAMAN</div>
+            <div class="project-body"><h3>Pengalaman Magang — PT Telkom Akses</h3><p>Dokumentasi kegiatan praktik kerja bersama tim. Pengalaman ini menjadi bagian dari proses belajar mengenai lingkungan kerja, layanan jaringan, dan komunikasi dengan pelanggan.</p><div class="project-meta">INTERNSHIP · TELECOMMUNICATION</div></div>
+          </article>
+          <article class="project-card">
+            <div class="project-visual"><img src="dokumentasi-odp.jpg" alt="Dokumentasi perangkat dan penataan kabel fiber optik" loading="lazy"></div>
+            <div class="project-caption">FIBER OPTIC</div>
+            <div class="project-body"><h3>Dokumentasi Perangkat Jaringan</h3><p>Dokumentasi perangkat distribusi dan penataan kabel fiber optik yang dijumpai dalam kegiatan praktik.</p><div class="project-meta">NETWORKING · FIELD DOCUMENTATION</div></div>
+          </article>
+          <article class="project-card">
+            <div class="project-visual"><img src="fusion-splicer.jpg" alt="Perangkat fusion splicer untuk penyambungan fiber optik" loading="lazy"></div>
+            <div class="project-caption">FIBER OPTIC</div>
+            <div class="project-body"><h3>Fusion Splicer</h3><p>Dokumentasi alat penyambung serat optik yang digunakan dalam pekerjaan instalasi dan pemeliharaan jaringan fiber optik.</p><div class="project-meta">TOOLS · FIBER OPTIC</div></div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="achievement">
+      <div class="wrap">
+        <div class="section-head">
+          <div><div class="section-label">04 / Growth</div><h2 class="section-title">Achievement</h2></div>
+          <p class="section-desc">Bagian pencapaian sesuai panduan. Tambahkan nama, tahun, penyelenggara, deskripsi, dan bukti jika tersedia.</p>
+        </div>
+        <div class="about-grid">
+          <article class="panel">
+            <h3>Pengalaman Magang — PT Telkom Akses</h3>
+            <p>Pengalaman praktik di lingkungan kerja yang berkaitan dengan jaringan, penyambungan kabel, konfigurasi, serta komunikasi dengan pelanggan.</p>
+            <div class="project-meta">Tahun: [Isi tahun magang] · Penyelenggara: PT Telkom Akses</div>
+          </article>
+          <article class="panel">
+            <h3>Portofolio & Pengembangan Skill</h3>
+            <p>Mendokumentasikan pembelajaran dan proyek mandiri sebagai bukti proses pengembangan kemampuan di bidang teknologi.</p>
+            <div class="project-meta">Tahun: 2026 · Dokumentasi: </div>
+          </article>
+        </div>
+        <p class="achievement-note">Catatan: isi pencapaian di atas masih berupa pengalaman dan contoh dokumentasi. Jangan mencantumkan sertifikat atau penghargaan yang belum benar-benar dimiliki.</p>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <div class="contact-box">
+          <div>
+            <div class="section-label">05 / Contact</div>
+            <h2>Mari terhubung.</h2>
+            <p>Terbuka untuk berdiskusi, belajar bersama, dan peluang pengembangan di bidang teknologi. Ganti tautan di bawah dengan akun aktif milikmu.</p>
+            <div class="contact-links">
+<a class="btn btn-primary"
+   href="https://mail.google.com/mail/?view=cm&fs=1&to=rizalsuryaananthaa@gmail.com"
+   target="_blank">
+   Email Saya ↗
+</a>              <a class="btn" href="https://github.com/rizalsuryaananthaa" target="_blank" rel="noreferrer">GitHub ↗</a>
+              <a class="btn" href="https://www.linkedin.com/in/rizal-surya-anantha-25b30a441?utm_source=share_via&utm_content=profile&utm_medium=member_android target"="_blank" rel="noreferrer">LinkedIn ↗</a>
+            </div>
+          </div>
+          <a class="btn" href="#home">Kembali ke atas ↑</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap footer-inner">
+      <span>© <span id="year"></span> Rizal. Personal Portfolio.</span>
+      <span>Dibuat dengan HTML, CSS, dan JavaScript.</span>
+    </div>
+  </footer>
+
+  <script>
+    const menuBtn = document.getElementById('menuBtn');
+    const navLinks = document.getElementById('navLinks');
+    menuBtn.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuBtn.setAttribute('aria-expanded', String(isOpen));
+    });
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+</html>
